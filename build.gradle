@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+//자바 버전
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly{
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	//밑에 라이브러리를 다운받는 공개된 사이트
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//provider 라이브러라 추가
+	implementation 'javax.inject:javax.inject:1'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+//코끼리 눌러줘야 새로고침됨
+//lombok setting plugin installed lombok 검색
+//lombok 사용하려면 setting annotation processor 들어가서 enable 켜주기
